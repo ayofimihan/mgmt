@@ -12,6 +12,7 @@ const {
   GraphQLList,
   GraphQLNonNull,
 } = require("graphql");
+const { findByIdAndDelete } = require("../models/Client");
 
 //Client type
 const ClientType = new GraphQLObjectType({
@@ -78,11 +79,10 @@ const RootQuery = new GraphQLObjectType({
 });
 
 //mutations
-
 const mutation = new GraphQLObjectType({
   name: 'Mutation',
   fields: {
-    addClient: {
+    addClient: { //Add client
       type: ClientType,
       args: {
         name: { type: GraphQLNonNull(GraphQLString)},
@@ -98,10 +98,19 @@ const mutation = new GraphQLObjectType({
         return client.save()
       }
 
+      },
+      deleteClient:{
+        type: ClientType,
+        args: {
+          id: {type: GraphQLNonNull(GraphQLID)}
+        },
+        resolve: (parent,args)=> Client.findByIdAndDelete(args.id)
       }
     }
   
 })
+
+
 
 module.exports = new GraphQLSchema({
   query: RootQuery,
