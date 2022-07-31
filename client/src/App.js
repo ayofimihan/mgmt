@@ -12,7 +12,7 @@ function App() {
       <div className="container">
         <Header />
         <Clients />
-        Hello World
+        Hello Worldd
       </div>
     </ApolloProvider>
   );
