@@ -12,7 +12,6 @@ function App() {
       <div className="container">
         <Header />
         <Clients />
-        Hello Worldd
       </div>
     </ApolloProvider>
   );
